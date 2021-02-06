@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.com.pulse.mapper.ProdutoMapper">
+
+    <select id="buscar" resultType="br.com.pulse.model.Produto">
+        select id, descricao, valor, quantidade from produto where id = #{produtoId};
+    </select>
+
+    <select id="listar" resultType="br.com.pulse.model.Produto">
+        select id, descricao, valor, quantidade from produto;
+    </select>
+
+    <insert id="salvar" parameterType="br.com.pulse.model.Produto"
+            useGeneratedKeys="true" keyColumn="id"
+            keyProperty="produto.id">
+        INSERT INTO produto
+        (descricao,valor,quantidade)
+        VALUES
+        (
+        #{produto.descricao},
+        #{produto.valor},
+        #{produto.quantidade}
+        )
+    </insert>
+
+    <update id="atualizar" parameterType="br.com.pulse.model.Produto"
+    >
+        UPDATE produto
+        SET
+        descricao = #{produto.descricao},
+        valor = #{produto.valor},
+        quantidade = #{produto.quantidade}
+        WHERE
+        id = #{produto.id}
+    </update>
+
+    <delete id="delete" parameterType="br.com.pulse.model.Produto"
+    >
+        DELETE FROM produto
+        WHERE
+        id = #{produto.id}
+    </delete>
+
+</mapper>
